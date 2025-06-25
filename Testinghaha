@@ -1,0 +1,211 @@
+AllowedPlayers = {
+    "CircularDingus9",
+    "Player2",
+    "Player3"
+}
+
+local AnimHandler = loadstring(game:HttpGet("https://raw.githubusercontent.com/ProudNamed/SuperLightning/refs/heads/main/AnimModule/MainModule"))()
+local AltAnim = game:GetObjects("rbxassetid://15434683426")[1]
+AltAnim.Parent = workspace
+game:GetService("ContentProvider"):PreloadAsync({AltAnim})
+
+local function playAltAnimation(character)
+    local track = AnimHandler.new(character, AltAnim)
+    track.TimePosition = 9.4
+    track:Play()
+    task.delay(1, function()
+        track:Stop()
+    end)
+end
+
+local targetAnimID = "rbxassetid://10468665991"
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local blockedSoundIds = {}
+
+local function playShortAnimation(humanoid)
+    local AnimAnim = Instance.new("Animation")
+    AnimAnim.AnimationId = "rbxassetid://18896127525"
+    local animTrack = humanoid:LoadAnimation(AnimAnim)
+    animTrack:Play()
+    task.delay(1, function()
+        animTrack:Stop()
+    end)
+end
+
+local function playVFX(character)
+    local RightArm = character:FindFirstChild("Right Arm")
+    if not RightArm then return end
+    local effectPaths = {
+        game.ReplicatedStorage.Emotes.VFX.VfxMods.Flasher.char["Right Arm"]["2"],
+        game.ReplicatedStorage.Emotes.VFX.VfxMods.Flasher.char["Right Arm"]["2"]["1"],
+        game.ReplicatedStorage.Emotes.VFX.VfxMods.Flasher.char["Right Arm"]["2"].Emit2,
+        game.ReplicatedStorage.Emotes.VFX.VfxMods.Flasher.char["Right Arm"]["1"],
+    }
+    local clonedEffects = {}
+    for _, effect in ipairs(effectPaths) do
+        local cloned = effect:Clone()
+        cloned.Parent = RightArm
+        table.insert(clonedEffects, cloned)
+        for _, child in ipairs(cloned:GetDescendants()) do
+            if child:IsA("ParticleEmitter") then
+                child:Emit(1)
+            end
+        end
+    end
+    task.delay(0.5, function()
+        for _, c in ipairs(clonedEffects) do
+            c:Destroy()
+        end
+    end)
+end
+
+local AllowedPlayers = AllowedPlayers or {}
+
+local function GetGitSound(GithubSnd, SoundName)
+    if not isfile(SoundName..".mp3") then
+        writefile(SoundName..".mp3", game:HttpGet(GithubSnd))
+    end
+    local sound = Instance.new("Sound")
+    sound.SoundId = (getcustomasset or getsynasset)(SoundName..".mp3")
+    sound.Volume = 4
+    sound.Name = SoundName
+    sound.Parent = workspace
+    return sound
+end
+
+local function playSoundsAndFlash(player)
+    if not AllowedPlayers[player.Name] then return end
+
+    local character = player.Character
+    if not character then return end
+    local hrp = character:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
+    local part1 = Instance.new("Part")
+    part1.Size = Vector3.new(1,1,1)
+    part1.Anchored = true
+    part1.CanCollide = false
+    part1.Transparency = 1
+    part1.CFrame = hrp.CFrame * CFrame.new(0,0,-4)
+    part1.Parent = workspace
+
+    local blackFlash = game.ReplicatedStorage.Emotes.VFX.VfxMods.Flasher.vfx.BlackFlashFx.Main:Clone()
+    blackFlash.Parent = part1
+    for _, child in ipairs(blackFlash:GetChildren()) do
+        if child:IsA("ParticleEmitter") then
+            child.Enabled = false
+            child:Emit(15)
+        end
+    end
+
+    local part2 = Instance.new("Part")
+    part2.Size = Vector3.new(1,1,1)
+    part2.Anchored = true
+    part2.CanCollide = false
+    part2.Transparency = 1
+    part2.CFrame = hrp.CFrame * CFrame.new(0,0,-16)
+    part2.Parent = workspace
+
+    local lastImpact = game.ReplicatedStorage.Emotes.VFX.VfxMods.Flasher.vfx.LastImpactFx.Attachment:Clone()
+    lastImpact.Parent = part2
+    for _, child in ipairs(lastImpact:GetChildren()) do
+        if child:IsA("ParticleEmitter") then
+            child.Enabled = false
+            child:Emit(15)
+        end
+    end
+end
+
+local function onAnimationPlayed(animationTrack, player)
+    if not AllowedPlayers[player.Name] then return end
+    if animationTrack.Animation.AnimationId == targetAnimID then
+        animationTrack:Stop()
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:WaitForChild("Humanoid")
+        if math.random() < 0.5 then
+            playAltAnimation(character)
+        else
+            playShortAnimation(humanoid)
+        end
+        playVFX(character)
+        playSoundsAndFlash(player)
+    end
+end
+
+local function setupPlayer(player)
+    if not AllowedPlayers[player.Name] then return end
+    local function onCharacterAdded(character)
+        local humanoid = character:WaitForChild("Humanoid")
+        humanoid.AnimationPlayed:Connect(function(animationTrack)
+            onAnimationPlayed(animationTrack, player)
+        end)
+    end
+    if player.Character then
+        onCharacterAdded(player.Character)
+    end
+    player.CharacterAdded:Connect(onCharacterAdded)
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+    setupPlayer(player)
+end
+
+Players.PlayerAdded:Connect(setupPlayer)
+
+RunService.Heartbeat:Connect(function()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player.Character then
+            for _, sound in ipairs(player.Character:GetDescendants()) do
+                if sound:IsA("Sound") and sound.IsPlaying and blockedSoundIds[sound.SoundId] then
+                    sound:Stop()
+                end
+            end
+        end
+    end
+end)
+
+local player = Players.LocalPlayer
+if not AllowedPlayers[player.Name] then return end
+
+local backpack = player:WaitForChild("Backpack")
+local character = player.Character or player.CharacterAdded:Wait()
+
+local function onToolEquipped(tool)
+    if tool.Name == "Normal Punch" or tool.Name == "Black Flash" then
+        task.delay(0.5, function()
+            local sound = GetGitSound(
+                "https://github.com/NetlessScripter/Vegeta/blob/0600a4fa2913e1078530dcc77dc589e078d2a8fa/copy_94FA9E69-4638-491E-B9FD-07F1C9AEB67C.mp3?raw=true",
+                "BlackFlashMusic Cool"
+            )
+            sound:Play()
+        end)
+    end
+end
+
+for _, tool in ipairs(backpack:GetChildren()) do
+    if tool:IsA("Tool") then
+        tool.Equipped:Connect(function() onToolEquipped(tool) end)
+    end
+end
+
+backpack.ChildAdded:Connect(function(child)
+    if child:IsA("Tool") then
+        child.Equipped:Connect(function() onToolEquipped(child) end)
+    end
+end)
+
+local function listenCharacterTools(char)
+    char.ChildAdded:Connect(function(child)
+        if child:IsA("Tool") then
+            child.Equipped:Connect(function() onToolEquipped(child) end)
+        end
+    end)
+end
+
+listenCharacterTools(character)
+player.CharacterAdded:Connect(function(char)
+    listenCharacterTools(char)
+end)
