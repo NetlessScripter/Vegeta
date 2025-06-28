@@ -1,0 +1,84 @@
+local l_LocalPlayer_1 = game:GetService("Players").LocalPlayer
+local l_Char_2 = l_LocalPlayer_1.Character or l_LocalPlayer_1.CharacterAdded:Wait()
+local l_Humanoid_3 = l_Char_2:WaitForChild("Humanoid")
+local l_RootPart_4 = l_Char_2:WaitForChild("HumanoidRootPart")
+local l_Camera_5 = workspace.CurrentCamera
+
+local l_RunService_6 = game:GetService("RunService")
+local l_UIS_7 = game:GetService("UserInputService")
+local l_TweenService_8 = game:GetService("TweenService")
+
+local l_FlyOn_9 = false
+local l_BodyVel_10, l_RenderConnection_11 = nil, nil
+local l_FX_12, l_FXCreated_13 = nil, false
+
+local l_FlySpeed_14 = 100
+local l_FOV_Idle_15, l_FOV_Fly_16 = 70, 80
+local l_BlockedAnimId_17 = "rbxassetid://7815618175"
+
+local l_Animator_18 = l_Humanoid_3:FindFirstChildOfClass("Animator") or l_Humanoid_3:WaitForChild("Animator")
+
+local l_IdleAnim_19 = Instance.new("Animation")
+l_IdleAnim_19.AnimationId = "rbxassetid://17124063826"
+local l_FlyAnim_20 = Instance.new("Animation")
+l_FlyAnim_20.AnimationId = "rbxassetid://17124063826"
+
+local l_IdleTrack_21, l_FlyTrack_22 = nil, nil
+
+local function l_TweenFOV_23(l_TargetFOV_24)
+	l_TweenService_8:Create(l_Camera_5, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {FieldOfView = l_TargetFOV_24}):Play()
+end
+
+local function l_StopAnim_25(l_Track_26)
+	if l_Track_26 and l_Track_26.IsPlaying then
+		l_Track_26:Stop()
+	end
+end
+
+local function l_SetupFX_27()
+	if l_FXCreated_13 then return end
+	local l_Template_28 = game.ReplicatedStorage.Resources.IceMeteor.LockTotal.LockSpawn.Flying:FindFirstChild("Attachment")
+	if l_Template_28 then
+		l_FX_12 = l_Template_28:Clone()
+		l_FX_12.Parent = l_RootPart_4
+		l_FX_12.CFrame = CFrame.Angles(math.rad(90), 0, 0)
+		for _, l_E_29 in ipairs(l_FX_12:GetChildren()) do
+			if l_E_29:IsA("ParticleEmitter") then
+				l_E_29.Enabled = false
+			end
+		end
+		l_FXCreated_13 = true
+	end
+end
+
+local function l_EnableFX_30()
+	if not l_FX_12 then return end
+	for _, l_P_31 in ipairs(l_FX_12:GetChildren()) do
+		if l_P_31:IsA("ParticleEmitter") then
+			if not l_P_31.Enabled then
+				l_P_31.Enabled = true
+				l_P_31:Emit(15)
+			end
+		end
+	end
+end
+
+local function l_DisableFX_32()
+	if not l_FX_12 then return end
+	for _, l_P_33 in ipairs(l_FX_12:GetChildren()) do
+		if l_P_33:IsA("ParticleEmitter") then
+			l_P_33.Enabled = false
+		end
+	end
+	l_FX_12:Destroy()
+	l_FX_12 = nil
+	l_FXCreated_13 = false
+end
+
+local function l_PlayFlyAnim_34()
+	if l_IdleTrack_21 then l_StopAnim_25(l_IdleTrack_21) end
+	if not l_FlyTrack_22 then
+		l_FlyTrack_22 = l_Animator_18:LoadAnimation(l_FlyAnim_20)
+	end
+	if not l_FlyTrack_22.IsPlaying then
+		l_FlyTrac_
