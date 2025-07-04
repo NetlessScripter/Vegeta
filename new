@@ -1,0 +1,156 @@
+local player = game:GetService("Players").LocalPlayer
+local guiParent = player:WaitForChild("PlayerGui")
+local http = game:GetService("HttpService")
+local lighting = game:GetService("Lighting")
+
+local link = "https://discord.gg/EdmHHmEsEb"
+local api = "https://project-mu-silk-77.vercel.app/api/validate"
+local soundId = "rbxassetid://2865228021"
+local hwid = (gethwid and gethwid()) or (identifyexecutor and identifyexecutor()) or "unknown"
+
+local function validate(key)
+	local req = syn and syn.request or request or http_request
+	if not req then return end
+
+	local body = http:JSONEncode({ hwid = hwid, key = key })
+
+	local ok, res = pcall(function()
+		return req({
+			Url = api,
+			Method = "POST",
+			Headers = { ["Content-Type"] = "application/json" },
+			Body = body
+		})
+	end)
+
+	if ok and res and res.StatusCode == 200 then
+		return http:JSONDecode(res.Body)
+	end
+end
+
+local gui = Instance.new("ScreenGui", guiParent)
+gui.Name = "KeyUI"
+gui.ResetOnSpawn = false
+
+local blur = Instance.new("BlurEffect", lighting)
+blur.Size = 24
+blur.Name = "Blur"
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 400, 0, 240)
+frame.Position = UDim2.new(0.5, -200, 0.5, -120)
+frame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+frame.BorderSizePixel = 0
+
+local function round(obj, size)
+	local uicorner = Instance.new("UICorner")
+	uicorner.CornerRadius = UDim.new(0, size)
+	uicorner.Parent = obj
+end
+
+local function stroke(obj, size, color)
+	local s = Instance.new("UIStroke")
+	s.Thickness = size
+	s.Color = color
+	s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	s.Parent = obj
+end
+
+round(frame, 10)
+stroke(frame, 2, Color3.fromRGB(0, 150, 255))
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.BackgroundTransparency = 1
+title.Text = "Made By Infinite Studios"
+title.Font = Enum.Font.GothamBlack
+title.TextScaled = true
+title.TextColor3 = Color3.fromRGB(0, 200, 255)
+
+local input = Instance.new("TextBox", frame)
+input.Size = UDim2.new(0.9, 0, 0, 50)
+input.Position = UDim2.new(0.05, 0, 0.3, 0)
+input.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+input.Text = ""
+input.PlaceholderText = "Enter your key..."
+input.Font = Enum.Font.Gotham
+input.TextScaled = true
+input.TextColor3 = Color3.new(1, 1, 1)
+input.ClearTextOnFocus = false
+round(input, 6)
+stroke(input, 1.5, Color3.fromRGB(0, 120, 255))
+
+local check = Instance.new("TextButton", frame)
+check.Size = UDim2.new(0.9, 0, 0, 45)
+check.Position = UDim2.new(0.05, 0, 0.6, 0)
+check.Text = "Check Key"
+check.Font = Enum.Font.GothamBold
+check.TextScaled = true
+check.TextColor3 = Color3.new(1, 1, 1)
+check.BackgroundColor3 = Color3.fromRGB(0, 120, 200)
+round(check, 6)
+stroke(check, 2, Color3.fromRGB(255, 255, 255))
+
+local copy = Instance.new("TextButton", frame)
+copy.Size = UDim2.new(0.9, 0, 0, 35)
+copy.Position = UDim2.new(0.05, 0, 0.82, 0)
+copy.Text = "🔗 Discord"
+copy.Font = Enum.Font.Gotham
+copy.TextScaled = true
+copy.TextColor3 = Color3.new(1, 1, 1)
+copy.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+round(copy, 6)
+stroke(copy, 1.5, Color3.fromRGB(114, 137, 218))
+
+copy.MouseButton1Click:Connect(function()
+	setclipboard(link)
+end)
+
+local function playSound()
+	local sound = Instance.new("Sound")
+	sound.SoundId = soundId
+	sound.Volume = 2
+	sound.Parent = workspace
+	sound:Play()
+end
+
+check.MouseButton1Click:Connect(function()
+	local key = input.Text
+	if key == "" then
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "Empty Key",
+			Text = "Please enter a key.",
+			Duration = 3
+		})
+		return
+	end
+
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Checking...",
+		Text = "Hold on...",
+		Duration = 2
+	})
+
+	local result = validate(key)
+
+	if result and result.valid then
+		playSound()
+		frame:TweenPosition(UDim2.new(0.5, -200, -1, 0), "Out", "Back", 1, true)
+		task.wait(1)
+		gui:Destroy()
+		if blur then blur:Destroy() end
+
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "Access Granted",
+			Text = "Welcome, " .. player.Name,
+			Duration = 4
+		})
+	else
+		playSound()
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "Invalid Key",
+			Text = "Try again or check your HWID.",
+			Duration = 4
+		})
+	end
+end)
