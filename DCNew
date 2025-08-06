@@ -1,0 +1,1252 @@
+l_l_v10_53_0 = game:service("TweenService")
+local l_LocalPlayer_0 = game.Players.LocalPlayer
+
+local v1101 = {}
+v1101.Char = l_LocalPlayer_0.Character or l_LocalPlayer_0.CharacterAdded:Wait()
+v1101.Hit = v1101.Char
+
+local v10 = game:service("TweenService")
+                        local l_Char_33 = v1101.Char
+                        local l_Hit_15 = v1101.Hit
+                        local l_Character_58 = game.Players.LocalPlayer.Character
+                        local l_l_Char_33_0 = l_Char_33
+                        local l_l_Hit_15_0 = l_Hit_15;
+                        local l_PrimaryPart_136 = l_Char_33.PrimaryPart
+                        local v28316 = true
+                        if l_Char_33 ~= l_Character_58 then
+                            v28316 = l_Hit_15 == l_Character_58
+                        end
+                        local v28317 = {};
+                        local l_v28317_0 = v28317 --[[ copy: 11 -> 392 ]];
+                        local l_l_l_Char_33_0_0 = l_l_Char_33_0 --[[ copy: 7 -> 393 ]];
+                        local _ = function(v28320, v28321) --[[ Line: 59507 ]]
+                            -- upvalues: l_v28317_0 (copy), l_l_l_Char_33_0_0 (copy), v10 (ref)
+                            if v28321 ~= 1 then
+                                for v28322, v28323 in pairs(l_v28317_0) do
+                                    v28322.Transparency = v28323;
+                                end;
+                                return;
+                            else
+                                for _, v28325 in pairs(l_l_l_Char_33_0_0:GetDescendants()) do
+                                    if v28325:IsA("BasePart") or v28325:IsA("Decal") then
+                                        if not l_v28317_0[v28325] then
+                                            l_v28317_0[v28325] = v28325.Transparency;
+                                        end;
+                                        v10:Create(v28325, TweenInfo.new(v28320, Enum.EasingStyle.Linear), {
+                                            Transparency = v28321
+                                        }):Play();
+                                    end;
+                                end;
+                                return;
+                            end;
+                        end;
+                        local l_NewDC_0 = game.ReplicatedStorage.Resources.NewDC
+                        local l_vfx_3 = l_NewDC_0.vfx
+                        local l_meshes_0 = l_NewDC_0.meshes
+                        local v28330 = require(game.ReplicatedStorage.library)
+                        local l_Thrown_53 = workspace.Thrown
+                        local l_v10_53 = v10;
+                        local l_PlayAttachment_11 = v28330.PlayAttachment
+                        local l_Maid_25 = v28330.Maid
+                        local _ = v28330.PlayTween
+                        local _ = v28330.CamShake
+                        local _ = v28330.PlayFlipBook
+                        local l_dtwait_11 = v28330.dtwait;
+                        local _ = v28330.EFP
+                        local _ = v28330.PlayMesh
+                        local _ = v28330.Impact
+                        local _ = v28330.GlassLight
+                        local _ = v28330.RaiseZIndex
+                        local l_Able_11 = v28330.Able
+                        local _ = v28330.LifeScale
+                        local _ = v28330.QuickFX
+                        local _ = v28330.QuickWeld
+                        local _ = v28330.Yield
+                        local _ = v28330.ProcessPart
+                        local _ = v28330.WeldObject
+                        local _ = v28330.Bezier
+                        local _ = require(game.ReplicatedStorage.MeshFlipbooks)
+                        local v28353 = setmetatable({}, Skill)
+                        v28353._maid = l_Maid_25.new()
+                        local _ = {}
+                        local v28355 = {}
+                        local v28356 = {}
+                        local v28357 = {}
+                        local v28358 = {}
+                        local v28359 = {}
+                        local v28360 = {}
+                        local v28361 = {}
+                        if v28316 then
+                            local l_l_NewDC_0_0 = l_NewDC_0 --[[ copy: 13 -> 409 ]];
+                            local l_l_Char_33_1 = l_Char_33 --[[ copy: 4 -> 410 ]];
+                            spawn(function() --[[ Line: 59584 ]]
+                                -- upvalues: l_l_NewDC_0_0 (copy), l_l_Char_33_1 (copy)
+                                if not workspace:GetAttribute("ez") then
+                                    workspace:SetAttribute("ez", true);
+                                    local v28364 = {};
+                                    for _, v28366 in pairs(l_l_NewDC_0_0.meshes:GetDescendants()) do
+                                        if v28366:IsA("Decal") then
+                                            table.insert(v28364, v28366.Texture);
+                                        end;
+                                    end;
+                                    local l_Part_34 = Instance.new("Part");
+                                    l_Part_34.Name = "DecalPart";
+                                    l_Part_34.Anchored = true;
+                                    l_Part_34.Transparency = 0.5;
+                                    l_Part_34.CanCollide = false;
+                                    l_Part_34.CanQuery = false;
+                                    l_Part_34.CanTouch = false;
+                                    l_Part_34.CFrame = l_l_Char_33_1.PrimaryPart.CFrame * CFrame.new(0, -10, 0);
+                                    l_Part_34.Parent = l_l_Char_33_1;
+                                    game.Debris:AddItem(l_Part_34, 15);
+                                    for _, v28369 in pairs(v28364) do
+                                        local l_Decal_899 = Instance.new("Decal");
+                                        l_Decal_899.Parent = l_Part_34;
+                                        l_Decal_899.Texture = v28369;
+                                        task.wait(0.0065);
+                                    end;
+                                end;
+                            end);
+                        end;
+                        for _, v28372 in pairs(l_l_Char_33_0:GetDescendants()) do
+                            if v28372:IsA("ParticleEmitter") or v28372:IsA("Trail") or v28372:IsA("PointLight") or v28372:IsA("Beam") then
+                                v28360[v28372] = v28372.Enabled;
+                            end;
+                        end;
+                        for _, v28374 in pairs(l_NewDC_0.ParentMeVictim:GetChildren()) do
+                            local v28375 = l_l_Char_33_0[tostring(v28374)];
+                            for _, v28377 in pairs(v28374:GetChildren()) do
+                                local v28378 = v28377:Clone();
+                                v28378.Parent = v28375;
+                                table.insert(v28361, v28378);
+                                if not v28377.Name:find("eye") then
+                                    table.insert(v28359, v28378);
+                                    if #v28378:GetChildren() > 0 then
+                                        for _, v28380 in pairs(v28378:GetChildren()) do
+                                            v28357[v28380] = {
+                                                Attachment0 = tostring(v28380.Attachment0), 
+                                                Attachment1 = tostring(v28380.Attachment1)
+                                            };
+                                        end;
+                                    end;
+                                end;
+                            end;
+                        end;
+                        for _, v28382 in pairs(l_NewDC_0.ParentMe:GetChildren()) do
+                            local v28383 = l_l_Char_33_0[tostring(v28382)];
+                            for _, v28385 in pairs(v28382:GetChildren()) do
+                                local v28386 = v28385:Clone();
+                                v28386.Parent = v28383;
+                                if v28386:IsA("Attachment") and v28386.Name:find("hand trail") then
+                                    table.insert(v28355, v28386);
+                                    if #v28386:GetChildren() > 0 then
+                                        for _, v28388 in pairs(v28386:GetChildren()) do
+                                            v28356[v28388] = {
+                                                Attachment0 = tostring(v28388.Attachment0), 
+                                                Attachment1 = tostring(v28388.Attachment1)
+                                            };
+                                        end;
+                                    end;
+                                end;
+                            end;
+                        end;
+                        for v28389, v28390 in pairs(v28357) do
+                            v28389.Attachment0 = v28359[v28390.Attachment0];
+                            v28389.Attachment1 = v28359[v28390.Attachment1];
+                        end;
+                        for v28391, v28392 in pairs(v28356) do
+                            v28391.Attachment0 = v28355[v28392.Attachment0];
+                            v28391.Attachment1 = v28355[v28392.Attachment1];
+                        end;
+                        for _, v28394 in pairs(l_l_Char_33_0:GetDescendants()) do
+                            if (v28394:IsA("ParticleEmitter") or v28394:IsA("Trail") or v28394:IsA("PointLight") or v28394:IsA("Beam")) and v28360[v28394] == nil then
+                                table.insert(v28358, v28394);
+                            end;
+                        end;
+                        local function v28400(v28395, v28396, v28397) --[[ Line: 59690 ]] --[[ Name: thingable ]]
+                            for _, v28399 in pairs(v28395:GetDescendants()) do
+                                if v28399:IsA(v28397) then
+                                    v28399.Enabled = v28396;
+                                end;
+                            end;
+                        end;
+                        local l_l_v10_53_0 = l_v10_53 --[[ copy: 18 -> 394 ]];
+                        local _ = function(v28402, v28403, v28404) --[[ Line: 59698 ]] --[[ Name: tween ]]
+                            -- upvalues: l_l_v10_53_0 (copy)
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28402 (copy), l_l_v10_53_0 (ref), v28403 (copy), v28404 (copy)
+                                if not v28402:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28402, v28403, {
+                                        CFrame = v28404.cframe, 
+                                        Size = v28404.size, 
+                                        Transparency = v28404.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28402, v28403, {
+                                        CFrame = v28404.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28402:FindFirstChildWhichIsA("SpecialMesh"), v28403, {
+                                        Scale = v28404.scale
+                                    }):Play();
+                                end;
+                                for _, v28406 in pairs(v28402:GetChildren()) do
+                                    if v28406:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28406, v28403, {
+                                            Transparency = v28404.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                        end;
+                        local _ = function(v28408) --[[ Line: 59716 ]] --[[ Name: tweensequence ]]
+                            local l_twtype_24 = v28408.twtype;
+                            local l_childtype_24 = v28408.childtype;
+                            local l_newvalues_24 = v28408.newvalues;
+                            local l_amount_29 = v28408.amount;
+                            local l_particle_24 = v28408.particle;
+                            local l_name_24 = v28408.name;
+                            task.spawn(function() --[[ Line: 59727 ]]
+                                -- upvalues: l_particle_24 (copy), l_name_24 (copy), l_childtype_24 (copy), l_amount_29 (copy), l_twtype_24 (copy), l_newvalues_24 (copy)
+                                for _, v28416 in pairs(l_particle_24:GetChildren()) do
+                                    if l_name_24 then
+                                        if v28416:IsA(l_childtype_24) and v28416.name == l_name_24 then
+                                            local v28417 = {};
+                                            local v28418 = {};
+                                            task.spawn(function() --[[ Line: 59734 ]]
+                                                -- upvalues: l_amount_29 (ref), v28416 (copy), l_twtype_24 (ref), v28417 (copy), l_newvalues_24 (ref), v28418 (copy)
+                                                for _ = 1, l_amount_29 do
+                                                    for _, v28421 in pairs(v28416[l_twtype_24].Keypoints) do
+                                                        table.insert(v28417, v28421);
+                                                    end;
+                                                    for _, v28423 in pairs(v28417) do
+                                                        local v28424 = NumberSequenceKeypoint.new(v28423.Time + l_newvalues_24[1], v28423.Value + l_newvalues_24[2], v28423.Envelope + l_newvalues_24[3]);
+                                                        table.insert(v28418, v28424);
+                                                    end;
+                                                    v28416[l_twtype_24] = NumberSequence.new(v28418);
+                                                    table.clear(v28418);
+                                                    table.clear(v28417);
+                                                    task.wait();
+                                                end;
+                                            end);
+                                        end;
+                                    elseif v28416:IsA(l_childtype_24) then
+                                        local v28425 = {};
+                                        local v28426 = {};
+                                        task.spawn(function() --[[ Line: 59758 ]]
+                                            -- upvalues: l_amount_29 (ref), v28416 (copy), l_twtype_24 (ref), v28425 (copy), l_newvalues_24 (ref), v28426 (copy)
+                                            for _ = 1, l_amount_29 do
+                                                for _, v28429 in pairs(v28416[l_twtype_24].Keypoints) do
+                                                    table.insert(v28425, v28429);
+                                                end;
+                                                for _, v28431 in pairs(v28425) do
+                                                    local v28432 = NumberSequenceKeypoint.new(v28431.Time + l_newvalues_24[1], v28431.Value + l_newvalues_24[2], v28431.Envelope + l_newvalues_24[3]);
+                                                    table.insert(v28426, v28432);
+                                                end;
+                                                v28416[l_twtype_24] = NumberSequence.new(v28426);
+                                                table.clear(v28426);
+                                                table.clear(v28425);
+                                                task.wait();
+                                            end;
+                                        end);
+                                    end;
+                                end;
+                            end);
+                        end;
+                        local l_l_Thrown_53_0 = l_Thrown_53 --[[ copy: 17 -> 395 ]];
+                        local l_v28353_0 = v28353 --[[ copy: 39 -> 396 ]];
+                        local function v28441(v28436) --[[ Line: 59785 ]] --[[ Name: makemesh ]]
+                            -- upvalues: l_l_Thrown_53_0 (copy), l_v28353_0 (copy)
+                            local v28437 = v28436.mesh:Clone();
+                            v28437.Parent = l_l_Thrown_53_0;
+                            l_v28353_0._maid:give(v28437);
+                            v28437.CFrame = v28436.cframe;
+                            if v28437:FindFirstChildWhichIsA("SpecialMesh") and v28436.scale then
+                                v28437:FindFirstChildWhichIsA("SpecialMesh").Scale = v28436.scale;
+                            elseif v28436.size then
+                                v28437.Size = v28436.size;
+                            end;
+                            local v28438 = nil;
+                            for _, v28440 in pairs(v28437:GetChildren()) do
+                                if v28440:IsA("Decal") then
+                                    v28440.Transparency = v28436.transparency;
+                                    v28438 = true;
+                                end;
+                            end;
+                            if not v28438 then
+                                v28437.Transparency = v28436.transparency;
+                            end;
+                            return v28437;
+                        end;
+                        local l_l_l_Char_33_0_1 = l_l_Char_33_0 --[[ copy: 7 -> 397 ]];
+                        local l_v28441_0 = v28441 --[[ copy: 51 -> 398 ]];
+                        local l_l_meshes_0_0 = l_meshes_0 --[[ copy: 15 -> 399 ]];
+                        local l_l_dtwait_11_0 = l_dtwait_11 --[[ copy: 24 -> 400 ]];
+                        local l_l_vfx_3_0 = l_vfx_3 --[[ copy: 14 -> 401 ]];
+                        local l_v28400_0 = v28400 --[[ copy: 48 -> 402 ]];
+                        local l_l_l_Hit_15_0_0 = l_l_Hit_15_0 --[[ copy: 8 -> 403 ]];
+                        local l_v28358_0 = v28358 --[[ copy: 44 -> 404 ]];
+                        local l_l_Able_11_0 = l_Able_11 --[[ copy: 30 -> 405 ]];
+                        local l_v28361_0 = v28361 --[[ copy: 47 -> 406 ]];
+                        local l_l_PlayAttachment_11_0 = l_PlayAttachment_11 --[[ copy: 19 -> 407 ]];
+                        local l_l_NewDC_0_1 = l_NewDC_0 --[[ copy: 13 -> 408 ]];
+                        task.spawn(function() --[[ Line: 59814 ]] --[[ Name: FirstEvent ]]
+                            -- upvalues: l_l_l_Char_33_0_1 (copy), l_v28441_0 (copy), l_l_meshes_0_0 (copy), l_l_v10_53_0 (copy), l_l_dtwait_11_0 (copy), l_l_vfx_3_0 (copy), l_l_Thrown_53_0 (copy), l_v28353_0 (copy), l_v28400_0 (copy), l_l_l_Hit_15_0_0 (copy), l_v28358_0 (copy), l_l_Able_11_0 (copy), l_v28361_0 (copy), l_l_PlayAttachment_11_0 (copy), l_l_NewDC_0_1 (copy)
+                            task.spawn(function() --[[ Line: 59815 ]]
+                                -- upvalues: l_l_l_Char_33_0_1 (ref), l_v28441_0 (ref), l_l_meshes_0_0 (ref), l_l_v10_53_0 (ref)
+                                l_l_l_Char_33_0_1["Right Arm"]["arm smoke 1"]["arm smoke"].Enabled = true;
+                                l_l_l_Char_33_0_1.Head.eye.ParticleEmitter.Enabled = true;
+                                l_l_l_Char_33_0_1.Head.eye1.ParticleEmitter.Enabled = true;
+                                local v28454 = l_v28441_0({
+                                    mesh = l_l_meshes_0_0["first wind mesh"], 
+                                    cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(-9, 0, -3) * CFrame.Angles(0, -2.059488517353309, 0), 
+                                    transparency = 1, 
+                                    size = Vector3.new(14.050000190734863, 12.5600004196167, 0, 0)
+                                });
+                                local v28455 = TweenInfo.new(0.7, Enum.EasingStyle.Sine);
+                                local v28456 = {
+                                    cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(0, 0, 0) * CFrame.Angles(0, 0, -2.792526803190927), 
+                                    transparency1 = 0.9, 
+                                    size = Vector3.new(14.050000190734863, 12.5600004196167, 21.701000213623047, 0)
+                                };
+                                task.spawn(function() --[[ Line: 59699 ]]
+                                    -- upvalues: v28454 (copy), l_l_v10_53_0 (ref), v28455 (copy), v28456 (copy)
+                                    if not v28454:FindFirstChildWhichIsA("SpecialMesh") then
+                                        l_l_v10_53_0:Create(v28454, v28455, {
+                                            CFrame = v28456.cframe, 
+                                            Size = v28456.size, 
+                                            Transparency = v28456.transparency1
+                                        }):Play();
+                                    else
+                                        l_l_v10_53_0:Create(v28454, v28455, {
+                                            CFrame = v28456.cframe
+                                        }):Play();
+                                        l_l_v10_53_0:Create(v28454:FindFirstChildWhichIsA("SpecialMesh"), v28455, {
+                                            Scale = v28456.scale
+                                        }):Play();
+                                    end;
+                                    for _, v28458 in pairs(v28454:GetChildren()) do
+                                        if v28458:IsA("Decal") then
+                                            l_l_v10_53_0:Create(v28458, v28455, {
+                                                Transparency = v28456.transparency2
+                                            }):Play();
+                                        end;
+                                    end;
+                                end);
+                                task.delay(0.4, function() --[[ Line: 59822 ]]
+                                    -- upvalues: v28454 (copy), l_l_l_Char_33_0_1 (ref), l_l_v10_53_0 (ref)
+                                    local l_v28454_0 = v28454;
+                                    local v28460 = TweenInfo.new(0.2, Enum.EasingStyle.Sine);
+                                    local v28461 = {
+                                        cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(0, 0, 0) * CFrame.Angles(0, 0, -2.792526803190927), 
+                                        transparency1 = 1, 
+                                        size = Vector3.new(14.050000190734863, 12.5600004196167, 21.701000213623047, 0)
+                                    };
+                                    task.spawn(function() --[[ Line: 59699 ]]
+                                        -- upvalues: l_v28454_0 (copy), l_l_v10_53_0 (ref), v28460 (copy), v28461 (copy)
+                                        if not l_v28454_0:FindFirstChildWhichIsA("SpecialMesh") then
+                                            l_l_v10_53_0:Create(l_v28454_0, v28460, {
+                                                CFrame = v28461.cframe, 
+                                                Size = v28461.size, 
+                                                Transparency = v28461.transparency1
+                                            }):Play();
+                                        else
+                                            l_l_v10_53_0:Create(l_v28454_0, v28460, {
+                                                CFrame = v28461.cframe
+                                            }):Play();
+                                            l_l_v10_53_0:Create(l_v28454_0:FindFirstChildWhichIsA("SpecialMesh"), v28460, {
+                                                Scale = v28461.scale
+                                            }):Play();
+                                        end;
+                                        for _, v28463 in pairs(l_v28454_0:GetChildren()) do
+                                            if v28463:IsA("Decal") then
+                                                l_l_v10_53_0:Create(v28463, v28460, {
+                                                    Transparency = v28461.transparency2
+                                                }):Play();
+                                            end;
+                                        end;
+                                    end);
+                                end);
+                            end);
+                            l_l_dtwait_11_0(0.83);
+                            local v28464 = l_l_vfx_3_0["wind beams air"]:Clone();
+                            v28464.Parent = l_l_Thrown_53_0;
+                            v28464.CFrame = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(0, 4, -7.7) * CFrame.Angles(0.6118251692866122, 0, 0);
+                            l_v28353_0._maid:give(v28464);
+                            l_v28400_0(v28464, true, "Beam");
+                            l_l_v10_53_0:Create(v28464, TweenInfo.new(0.25, Enum.EasingStyle.Linear), {
+                                CFrame = v28464.CFrame * CFrame.new(4, -1.5, -49) * CFrame.Angles(0.24434609527920614, 0, 3.141592653589793)
+                            }):Play();
+                            task.delay(0.26, function() --[[ Line: 59837 ]]
+                                -- upvalues: l_l_v10_53_0 (ref), v28464 (copy)
+                                l_l_v10_53_0:Create(v28464, TweenInfo.new(0.9, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+                                    CFrame = v28464.CFrame * CFrame.new(8, 0, -50) * CFrame.Angles(0.24434609527920614, 0, 3.141592653589793)
+                                }):Play();
+                            end);
+                            local v28465 = 255;
+                            task.spawn(function() --[[ Line: 59843 ]]
+                                -- upvalues: v28465 (ref), v28464 (copy), l_v28400_0 (ref), l_l_dtwait_11_0 (ref)
+                                for v28466 = 1, 75 do
+                                    v28465 = v28465 - 2.8;
+                                    for _, v28468 in pairs(v28464:GetDescendants()) do
+                                        if v28468:IsA("Beam") then
+                                            v28468.Color = ColorSequence.new({
+                                                ColorSequenceKeypoint.new(0, Color3.fromRGB(v28465, v28465, v28465)), 
+                                                ColorSequenceKeypoint.new(1, Color3.fromRGB(v28465, v28465, v28465))
+                                            });
+                                        end;
+                                    end;
+                                    if v28466 == 75 then
+                                        l_v28400_0(v28464, false, "Beam");
+                                    end;
+                                    l_l_dtwait_11_0(0.01);
+                                end;
+                            end);
+                            local v28469 = l_v28441_0({
+                                mesh = l_l_meshes_0_0["first punch impact"], 
+                                cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(0, 2, -10) * CFrame.Angles(-0.767944870877505, -0.10471975511965978, 0.15707963267948966), 
+                                transparency = 0, 
+                                size = Vector3.new(40, 0.0010000000474974513, 40, 0)
+                            });
+                            local v28470 = TweenInfo.new(0.2, Enum.EasingStyle.Sine);
+                            local v28471 = {
+                                cframe = v28469.CFrame * CFrame.new(0, 25, 0), 
+                                transparency1 = 1, 
+                                size = Vector3.new(0, 50, 0, 0)
+                            };
+                            local l_v28470_0 = v28470 --[[ copy: 4 -> 27 ]];
+                            local l_v28471_0 = v28471 --[[ copy: 5 -> 28 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28469 (copy), l_l_v10_53_0 (ref), l_v28470_0 (copy), l_v28471_0 (copy)
+                                if not v28469:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28469, l_v28470_0, {
+                                        CFrame = l_v28471_0.cframe, 
+                                        Size = l_v28471_0.size, 
+                                        Transparency = l_v28471_0.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28469, l_v28470_0, {
+                                        CFrame = l_v28471_0.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28469:FindFirstChildWhichIsA("SpecialMesh"), l_v28470_0, {
+                                        Scale = l_v28471_0.scale
+                                    }):Play();
+                                end;
+                                for _, v28475 in pairs(v28469:GetChildren()) do
+                                    if v28475:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28475, l_v28470_0, {
+                                            Transparency = l_v28471_0.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            v28470 = l_v28441_0({
+                                mesh = l_l_meshes_0_0["first punch mesh 1"], 
+                                cframe = l_l_l_Hit_15_0_0.Torso.CFrame * CFrame.new(0, 0, 0) * CFrame.Angles(0.12217304763960307, 0.0859400123682008, -3.071011538639142), 
+                                transparency = 1, 
+                                size = Vector3.new(64.09100341796875, 47.55799865722656, 0, 0)
+                            });
+                            v28471 = TweenInfo.new(1, Enum.EasingStyle.Linear);
+                            local v28476 = {
+                                size = Vector3.new(55.07400131225586, 44.88600158691406, 155.73199462890625, 0)
+                            };
+                            local l_v28471_1 = v28471 --[[ copy: 5 -> 29 ]];
+                            local l_v28476_0 = v28476 --[[ copy: 6 -> 30 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28470 (copy), l_l_v10_53_0 (ref), l_v28471_1 (copy), l_v28476_0 (copy)
+                                if not v28470:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28470, l_v28471_1, {
+                                        CFrame = l_v28476_0.cframe, 
+                                        Size = l_v28476_0.size, 
+                                        Transparency = l_v28476_0.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28470, l_v28471_1, {
+                                        CFrame = l_v28476_0.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28470:FindFirstChildWhichIsA("SpecialMesh"), l_v28471_1, {
+                                        Scale = l_v28476_0.scale
+                                    }):Play();
+                                end;
+                                for _, v28480 in pairs(v28470:GetChildren()) do
+                                    if v28480:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28480, l_v28471_1, {
+                                            Transparency = l_v28476_0.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            v28471 = TweenInfo.new(0.2, Enum.EasingStyle.Linear);
+                            v28476 = {
+                                transparency1 = 0.95
+                            };
+                            local l_v28471_2 = v28471 --[[ copy: 5 -> 31 ]];
+                            local l_v28476_1 = v28476 --[[ copy: 6 -> 32 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28470 (copy), l_l_v10_53_0 (ref), l_v28471_2 (copy), l_v28476_1 (copy)
+                                if not v28470:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28470, l_v28471_2, {
+                                        CFrame = l_v28476_1.cframe, 
+                                        Size = l_v28476_1.size, 
+                                        Transparency = l_v28476_1.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28470, l_v28471_2, {
+                                        CFrame = l_v28476_1.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28470:FindFirstChildWhichIsA("SpecialMesh"), l_v28471_2, {
+                                        Scale = l_v28476_1.scale
+                                    }):Play();
+                                end;
+                                for _, v28484 in pairs(v28470:GetChildren()) do
+                                    if v28484:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28484, l_v28471_2, {
+                                            Transparency = l_v28476_1.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            task.delay(0.1, function() --[[ Line: 59872 ]]
+                                -- upvalues: v28470 (copy), l_l_v10_53_0 (ref), l_l_dtwait_11_0 (ref)
+                                local l_v28470_1 = v28470;
+                                local v28486 = TweenInfo.new(0.2, Enum.EasingStyle.Linear);
+                                local v28487 = {
+                                    cframe = v28470.CFrame * CFrame.new(5, 0, -45) * CFrame.Angles(0, 0, 3.141592653589793)
+                                };
+                                local l_l_v28470_1_0 = l_v28470_1 --[[ copy: 0 -> 3 ]];
+                                local l_v28486_0 = v28486 --[[ copy: 1 -> 4 ]];
+                                local l_v28487_0 = v28487 --[[ copy: 2 -> 5 ]];
+                                task.spawn(function() --[[ Line: 59699 ]]
+                                    -- upvalues: l_l_v28470_1_0 (copy), l_l_v10_53_0 (ref), l_v28486_0 (copy), l_v28487_0 (copy)
+                                    if not l_l_v28470_1_0:FindFirstChildWhichIsA("SpecialMesh") then
+                                        l_l_v10_53_0:Create(l_l_v28470_1_0, l_v28486_0, {
+                                            CFrame = l_v28487_0.cframe, 
+                                            Size = l_v28487_0.size, 
+                                            Transparency = l_v28487_0.transparency1
+                                        }):Play();
+                                    else
+                                        l_l_v10_53_0:Create(l_l_v28470_1_0, l_v28486_0, {
+                                            CFrame = l_v28487_0.cframe
+                                        }):Play();
+                                        l_l_v10_53_0:Create(l_l_v28470_1_0:FindFirstChildWhichIsA("SpecialMesh"), l_v28486_0, {
+                                            Scale = l_v28487_0.scale
+                                        }):Play();
+                                    end;
+                                    for _, v28492 in pairs(l_l_v28470_1_0:GetChildren()) do
+                                        if v28492:IsA("Decal") then
+                                            l_l_v10_53_0:Create(v28492, l_v28486_0, {
+                                                Transparency = l_v28487_0.transparency2
+                                            }):Play();
+                                        end;
+                                    end;
+                                end);
+                                l_l_dtwait_11_0(0.2);
+                                l_v28470_1 = v28470;
+                                v28486 = TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.Out);
+                                v28487 = {
+                                    cframe = v28470.CFrame * CFrame.new(5, 0, -15) * CFrame.Angles(0, 0, 3.141592653589793)
+                                };
+                                local l_l_v28470_1_1 = l_v28470_1 --[[ copy: 0 -> 6 ]];
+                                local l_v28486_1 = v28486 --[[ copy: 1 -> 7 ]];
+                                local l_v28487_1 = v28487 --[[ copy: 2 -> 8 ]];
+                                task.spawn(function() --[[ Line: 59699 ]]
+                                    -- upvalues: l_l_v28470_1_1 (copy), l_l_v10_53_0 (ref), l_v28486_1 (copy), l_v28487_1 (copy)
+                                    if not l_l_v28470_1_1:FindFirstChildWhichIsA("SpecialMesh") then
+                                        l_l_v10_53_0:Create(l_l_v28470_1_1, l_v28486_1, {
+                                            CFrame = l_v28487_1.cframe, 
+                                            Size = l_v28487_1.size, 
+                                            Transparency = l_v28487_1.transparency1
+                                        }):Play();
+                                    else
+                                        l_l_v10_53_0:Create(l_l_v28470_1_1, l_v28486_1, {
+                                            CFrame = l_v28487_1.cframe
+                                        }):Play();
+                                        l_l_v10_53_0:Create(l_l_v28470_1_1:FindFirstChildWhichIsA("SpecialMesh"), l_v28486_1, {
+                                            Scale = l_v28487_1.scale
+                                        }):Play();
+                                    end;
+                                    for _, v28497 in pairs(l_l_v28470_1_1:GetChildren()) do
+                                        if v28497:IsA("Decal") then
+                                            l_l_v10_53_0:Create(v28497, l_v28486_1, {
+                                                Transparency = l_v28487_1.transparency2
+                                            }):Play();
+                                        end;
+                                    end;
+                                end);
+                                l_v28470_1 = v28470;
+                                v28486 = TweenInfo.new(0.45, Enum.EasingStyle.Sine);
+                                v28487 = {
+                                    transparency1 = 1, 
+                                    size = Vector3.new(64.09100341796875, 47.55799865722656, 211.73399353027344, 0)
+                                };
+                                task.spawn(function() --[[ Line: 59699 ]]
+                                    -- upvalues: l_v28470_1 (copy), l_l_v10_53_0 (ref), v28486 (copy), v28487 (copy)
+                                    if not l_v28470_1:FindFirstChildWhichIsA("SpecialMesh") then
+                                        l_l_v10_53_0:Create(l_v28470_1, v28486, {
+                                            CFrame = v28487.cframe, 
+                                            Size = v28487.size, 
+                                            Transparency = v28487.transparency1
+                                        }):Play();
+                                    else
+                                        l_l_v10_53_0:Create(l_v28470_1, v28486, {
+                                            CFrame = v28487.cframe
+                                        }):Play();
+                                        l_l_v10_53_0:Create(l_v28470_1:FindFirstChildWhichIsA("SpecialMesh"), v28486, {
+                                            Scale = v28487.scale
+                                        }):Play();
+                                    end;
+                                    for _, v28499 in pairs(l_v28470_1:GetChildren()) do
+                                        if v28499:IsA("Decal") then
+                                            l_l_v10_53_0:Create(v28499, v28486, {
+                                                Transparency = v28487.transparency2
+                                            }):Play();
+                                        end;
+                                    end;
+                                end);
+                            end);
+                            v28471 = l_v28441_0({
+                                mesh = l_l_meshes_0_0["first punch mesh 2"], 
+                                cframe = l_l_l_Hit_15_0_0.Torso.CFrame * CFrame.new(0, 0, 7) * CFrame.Angles(-1.3337631610815466, 0.0859400123682008, -3.175731293758802), 
+                                transparency = 1, 
+                                size = Vector3.new(50, 0.0010000000474974513, 50, 0)
+                            });
+                            v28476 = TweenInfo.new(1, Enum.EasingStyle.Linear);
+                            local v28500 = {
+                                size = Vector3.new(50.4900016784668, 150, 50.2599983215332, 0)
+                            };
+                            local l_v28476_2 = v28476 --[[ copy: 6 -> 33 ]];
+                            local l_v28500_0 = v28500 --[[ copy: 7 -> 34 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28471 (copy), l_l_v10_53_0 (ref), l_v28476_2 (copy), l_v28500_0 (copy)
+                                if not v28471:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28471, l_v28476_2, {
+                                        CFrame = l_v28500_0.cframe, 
+                                        Size = l_v28500_0.size, 
+                                        Transparency = l_v28500_0.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28471, l_v28476_2, {
+                                        CFrame = l_v28500_0.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28471:FindFirstChildWhichIsA("SpecialMesh"), l_v28476_2, {
+                                        Scale = l_v28500_0.scale
+                                    }):Play();
+                                end;
+                                for _, v28504 in pairs(v28471:GetChildren()) do
+                                    if v28504:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28504, l_v28476_2, {
+                                            Transparency = l_v28500_0.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            v28476 = TweenInfo.new(0.2, Enum.EasingStyle.Linear);
+                            v28500 = {
+                                transparency1 = 0.5
+                            };
+                            local l_v28476_3 = v28476 --[[ copy: 6 -> 35 ]];
+                            local l_v28500_1 = v28500 --[[ copy: 7 -> 36 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28471 (copy), l_l_v10_53_0 (ref), l_v28476_3 (copy), l_v28500_1 (copy)
+                                if not v28471:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28471, l_v28476_3, {
+                                        CFrame = l_v28500_1.cframe, 
+                                        Size = l_v28500_1.size, 
+                                        Transparency = l_v28500_1.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28471, l_v28476_3, {
+                                        CFrame = l_v28500_1.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28471:FindFirstChildWhichIsA("SpecialMesh"), l_v28476_3, {
+                                        Scale = l_v28500_1.scale
+                                    }):Play();
+                                end;
+                                for _, v28508 in pairs(v28471:GetChildren()) do
+                                    if v28508:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28508, l_v28476_3, {
+                                            Transparency = l_v28500_1.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            task.delay(0.1, function() --[[ Line: 59885 ]]
+                                -- upvalues: v28471 (copy), l_l_v10_53_0 (ref), l_l_dtwait_11_0 (ref)
+                                local l_v28471_3 = v28471;
+                                local v28510 = TweenInfo.new(0.2, Enum.EasingStyle.Linear);
+                                local v28511 = {
+                                    cframe = v28471.CFrame * CFrame.new(3, -30, 0) * CFrame.Angles(0, 3.141592653589793, 0)
+                                };
+                                local l_l_v28471_3_0 = l_v28471_3 --[[ copy: 0 -> 3 ]];
+                                local l_v28510_0 = v28510 --[[ copy: 1 -> 4 ]];
+                                local l_v28511_0 = v28511 --[[ copy: 2 -> 5 ]];
+                                task.spawn(function() --[[ Line: 59699 ]]
+                                    -- upvalues: l_l_v28471_3_0 (copy), l_l_v10_53_0 (ref), l_v28510_0 (copy), l_v28511_0 (copy)
+                                    if not l_l_v28471_3_0:FindFirstChildWhichIsA("SpecialMesh") then
+                                        l_l_v10_53_0:Create(l_l_v28471_3_0, l_v28510_0, {
+                                            CFrame = l_v28511_0.cframe, 
+                                            Size = l_v28511_0.size, 
+                                            Transparency = l_v28511_0.transparency1
+                                        }):Play();
+                                    else
+                                        l_l_v10_53_0:Create(l_l_v28471_3_0, l_v28510_0, {
+                                            CFrame = l_v28511_0.cframe
+                                        }):Play();
+                                        l_l_v10_53_0:Create(l_l_v28471_3_0:FindFirstChildWhichIsA("SpecialMesh"), l_v28510_0, {
+                                            Scale = l_v28511_0.scale
+                                        }):Play();
+                                    end;
+                                    for _, v28516 in pairs(l_l_v28471_3_0:GetChildren()) do
+                                        if v28516:IsA("Decal") then
+                                            l_l_v10_53_0:Create(v28516, l_v28510_0, {
+                                                Transparency = l_v28511_0.transparency2
+                                            }):Play();
+                                        end;
+                                    end;
+                                end);
+                                l_l_dtwait_11_0(0.2);
+                                l_v28471_3 = v28471;
+                                v28510 = TweenInfo.new(0.7, Enum.EasingStyle.Sine, Enum.EasingDirection.Out);
+                                v28511 = {
+                                    cframe = v28471.CFrame * CFrame.new(3, -10, 0) * CFrame.Angles(0, 3.141592653589793, 0)
+                                };
+                                local l_l_v28471_3_1 = l_v28471_3 --[[ copy: 0 -> 6 ]];
+                                local l_v28510_1 = v28510 --[[ copy: 1 -> 7 ]];
+                                local l_v28511_1 = v28511 --[[ copy: 2 -> 8 ]];
+                                task.spawn(function() --[[ Line: 59699 ]]
+                                    -- upvalues: l_l_v28471_3_1 (copy), l_l_v10_53_0 (ref), l_v28510_1 (copy), l_v28511_1 (copy)
+                                    if not l_l_v28471_3_1:FindFirstChildWhichIsA("SpecialMesh") then
+                                        l_l_v10_53_0:Create(l_l_v28471_3_1, l_v28510_1, {
+                                            CFrame = l_v28511_1.cframe, 
+                                            Size = l_v28511_1.size, 
+                                            Transparency = l_v28511_1.transparency1
+                                        }):Play();
+                                    else
+                                        l_l_v10_53_0:Create(l_l_v28471_3_1, l_v28510_1, {
+                                            CFrame = l_v28511_1.cframe
+                                        }):Play();
+                                        l_l_v10_53_0:Create(l_l_v28471_3_1:FindFirstChildWhichIsA("SpecialMesh"), l_v28510_1, {
+                                            Scale = l_v28511_1.scale
+                                        }):Play();
+                                    end;
+                                    for _, v28521 in pairs(l_l_v28471_3_1:GetChildren()) do
+                                        if v28521:IsA("Decal") then
+                                            l_l_v10_53_0:Create(v28521, l_v28510_1, {
+                                                Transparency = l_v28511_1.transparency2
+                                            }):Play();
+                                        end;
+                                    end;
+                                end);
+                                l_v28471_3 = v28471;
+                                v28510 = TweenInfo.new(0.55, Enum.EasingStyle.Sine);
+                                v28511 = {
+                                    size = Vector3.new(50.4900016784668, 150, 50.2599983215332, 0), 
+                                    transparency1 = 1
+                                };
+                                task.spawn(function() --[[ Line: 59699 ]]
+                                    -- upvalues: l_v28471_3 (copy), l_l_v10_53_0 (ref), v28510 (copy), v28511 (copy)
+                                    if not l_v28471_3:FindFirstChildWhichIsA("SpecialMesh") then
+                                        l_l_v10_53_0:Create(l_v28471_3, v28510, {
+                                            CFrame = v28511.cframe, 
+                                            Size = v28511.size, 
+                                            Transparency = v28511.transparency1
+                                        }):Play();
+                                    else
+                                        l_l_v10_53_0:Create(l_v28471_3, v28510, {
+                                            CFrame = v28511.cframe
+                                        }):Play();
+                                        l_l_v10_53_0:Create(l_v28471_3:FindFirstChildWhichIsA("SpecialMesh"), v28510, {
+                                            Scale = v28511.scale
+                                        }):Play();
+                                    end;
+                                    for _, v28523 in pairs(l_v28471_3:GetChildren()) do
+                                        if v28523:IsA("Decal") then
+                                            l_l_v10_53_0:Create(v28523, v28510, {
+                                                Transparency = v28511.transparency2
+                                            }):Play();
+                                        end;
+                                    end;
+                                end);
+                            end);
+                            l_l_dtwait_11_0(0.4);
+                            v28476 = l_v28441_0({
+                                mesh = l_l_meshes_0_0["first punch fall mesh"], 
+                                cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(0.13, 3.3, -4.9) * CFrame.Angles(0, 0, 0), 
+                                transparency = 0, 
+                                size = Vector3.new(0, 20, 0, 0)
+                            });
+                            v28500 = TweenInfo.new(0.11, Enum.EasingStyle.Sine, Enum.EasingDirection.Out);
+                            local v28524 = {
+                                size = Vector3.new(25, 1, 25, 0), 
+                                transparency1 = 1, 
+                                CFrame = v28476.CFrame * CFrame.new(0, 8, 0)
+                            };
+                            local l_v28500_2 = v28500 --[[ copy: 7 -> 37 ]];
+                            local l_v28524_0 = v28524 --[[ copy: 8 -> 38 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28476 (copy), l_l_v10_53_0 (ref), l_v28500_2 (copy), l_v28524_0 (copy)
+                                if not v28476:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28476, l_v28500_2, {
+                                        CFrame = l_v28524_0.cframe, 
+                                        Size = l_v28524_0.size, 
+                                        Transparency = l_v28524_0.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28476, l_v28500_2, {
+                                        CFrame = l_v28524_0.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28476:FindFirstChildWhichIsA("SpecialMesh"), l_v28500_2, {
+                                        Scale = l_v28524_0.scale
+                                    }):Play();
+                                end;
+                                for _, v28528 in pairs(v28476:GetChildren()) do
+                                    if v28528:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28528, l_v28500_2, {
+                                            Transparency = l_v28524_0.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            l_l_dtwait_11_0(0.55);
+                            for _, v28530 in pairs(l_v28358_0) do
+                                v28530.Enabled = true;
+                            end;
+                            task.delay(0.5, function() --[[ Line: 59904 ]]
+                                -- upvalues: l_v28358_0 (ref)
+                                for _, v28532 in pairs(l_v28358_0) do
+                                    v28532.Enabled = false;
+                                end;
+                            end);
+                            l_l_dtwait_11_0(0.05);
+                            v28500 = l_l_vfx_3_0.lines1:Clone();
+                            v28500.Parent = l_l_Thrown_53_0;
+                            v28500.CFrame = workspace.CurrentCamera.CFrame;
+                            v28500.CFrame = v28500.CFrame * CFrame.new(20, 43, -150) * CFrame.Angles(1.9896753472735358, 0, 0.12217304763960307);
+                            l_v28353_0._maid:give(v28500);
+                            l_l_Able_11_0({
+                                FX = v28500, 
+                                On = true
+                            });
+                            l_l_dtwait_11_0(0.83);
+                            for _, v28534 in pairs(l_v28361_0) do
+                                for _, v28536 in pairs(v28534:GetDescendants()) do
+                                    if v28536:IsA("ParticleEmitter") then
+                                        v28536:Emit(v28536:GetAttribute("EmitCount"));
+                                    end;
+                                end;
+                            end;
+                            l_l_dtwait_11_0(0.5);
+                            task.delay(0.1, function() --[[ Line: 59934 ]]
+                                -- upvalues: l_l_vfx_3_0 (ref), l_l_Thrown_53_0 (ref), l_l_l_Char_33_0_1 (ref), l_v28353_0 (ref), l_l_PlayAttachment_11_0 (ref)
+                                local v28537 = l_l_vfx_3_0["jump circles"]:Clone();
+                                v28537.Parent = l_l_Thrown_53_0;
+                                v28537.CFrame = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(2, 0, -7) * CFrame.Angles(0, 0, 0);
+                                l_v28353_0._maid:give(v28537);
+                                l_l_PlayAttachment_11_0(v28537);
+                            end);
+                            v28524 = l_v28441_0({
+                                mesh = l_l_meshes_0_0["jump mesh"], 
+                                cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(-9, 0, 0) * CFrame.Angles(0.6412863270602766, 0, 0.10124654990819106), 
+                                transparency = 0.95, 
+                                size = Vector3.new(36.52000045776367, 37.60100173950195, 0, 0)
+                            });
+                            local v28538 = TweenInfo.new(0.9, Enum.EasingStyle.Linear);
+                            local v28539 = {
+                                size = Vector3.new(36.52000045776367, 37.60100173950195, 135.83700561523438, 0), 
+                                transparency1 = 1, 
+                                cframe = v28524.CFrame * CFrame.new(0, 0, -38) * CFrame.Angles(0, 0, 3.141592653589793)
+                            };
+                            local l_v28538_0 = v28538 --[[ copy: 9 -> 39 ]];
+                            local l_v28539_0 = v28539 --[[ copy: 10 -> 40 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28524 (copy), l_l_v10_53_0 (ref), l_v28538_0 (copy), l_v28539_0 (copy)
+                                if not v28524:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28524, l_v28538_0, {
+                                        CFrame = l_v28539_0.cframe, 
+                                        Size = l_v28539_0.size, 
+                                        Transparency = l_v28539_0.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28524, l_v28538_0, {
+                                        CFrame = l_v28539_0.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28524:FindFirstChildWhichIsA("SpecialMesh"), l_v28538_0, {
+                                        Scale = l_v28539_0.scale
+                                    }):Play();
+                                end;
+                                for _, v28543 in pairs(v28524:GetChildren()) do
+                                    if v28543:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28543, l_v28538_0, {
+                                            Transparency = l_v28539_0.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            v28538 = l_l_vfx_3_0.lines1:Clone();
+                            v28500.Parent = l_l_Thrown_53_0;
+                            v28500.CFrame = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(8.7, -2.75, 4) * CFrame.Angles(0, 0, 0);
+                            l_v28353_0._maid:give(v28500);
+                            l_l_PlayAttachment_11_0(v28538);
+                            v28539 = l_v28441_0({
+                                mesh = l_l_meshes_0_0["jump mesh 1"], 
+                                cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(0, 0, -6.2) * CFrame.Angles(0, -1.5707963267948966, -0.5578595888149476), 
+                                transparency = 0
+                            });
+                            local v28544 = TweenInfo.new(0.7, Enum.EasingStyle.Sine, Enum.EasingDirection.Out);
+                            local v28545 = {
+                                cframe = v28539.CFrame * CFrame.new(-89.7, 14.4, 1.3) * CFrame.Angles(3.141592653589793, 0, 0.17453292519943295)
+                            };
+                            local l_v28544_0 = v28544 --[[ copy: 11 -> 41 ]];
+                            local l_v28545_0 = v28545 --[[ copy: 12 -> 42 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28539 (copy), l_l_v10_53_0 (ref), l_v28544_0 (copy), l_v28545_0 (copy)
+                                if not v28539:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28539, l_v28544_0, {
+                                        CFrame = l_v28545_0.cframe, 
+                                        Size = l_v28545_0.size, 
+                                        Transparency = l_v28545_0.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28539, l_v28544_0, {
+                                        CFrame = l_v28545_0.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28539:FindFirstChildWhichIsA("SpecialMesh"), l_v28544_0, {
+                                        Scale = l_v28545_0.scale
+                                    }):Play();
+                                end;
+                                for _, v28549 in pairs(v28539:GetChildren()) do
+                                    if v28549:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28549, l_v28544_0, {
+                                            Transparency = l_v28545_0.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            v28544 = TweenInfo.new(0.8, Enum.EasingStyle.Linear);
+                            v28545 = {
+                                transparency2 = 1
+                            };
+                            local l_v28544_1 = v28544 --[[ copy: 11 -> 43 ]];
+                            local l_v28545_1 = v28545 --[[ copy: 12 -> 44 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28539 (copy), l_l_v10_53_0 (ref), l_v28544_1 (copy), l_v28545_1 (copy)
+                                if not v28539:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28539, l_v28544_1, {
+                                        CFrame = l_v28545_1.cframe, 
+                                        Size = l_v28545_1.size, 
+                                        Transparency = l_v28545_1.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28539, l_v28544_1, {
+                                        CFrame = l_v28545_1.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28539:FindFirstChildWhichIsA("SpecialMesh"), l_v28544_1, {
+                                        Scale = l_v28545_1.scale
+                                    }):Play();
+                                end;
+                                for _, v28553 in pairs(v28539:GetChildren()) do
+                                    if v28553:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28553, l_v28544_1, {
+                                            Transparency = l_v28545_1.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            v28544 = l_l_NewDC_0_1.ScreenGui:Clone();
+                            v28545 = {};
+                            local v28554 = {};
+                            for _, v28556 in pairs(v28544:GetDescendants()) do
+                                if v28556:IsA("ImageLabel") then
+                                    v28545[v28556] = v28556.Size;
+                                    v28554[v28556] = v28556.Position;
+                                    v28556.Size = UDim2.new(0, 0, 0, 1);
+                                    v28556.Position = UDim2.new(0, 0, 0, 0);
+                                end;
+                            end;
+                            v28544.Parent = game.Players.LocalPlayer.PlayerGui;
+                            l_l_dtwait_11_0(0.8);
+                            v28500:Destroy();
+                            for v28557, v28558 in pairs(v28545) do
+                                v28557.Size = v28558;
+                            end;
+                            for v28559, v28560 in pairs(v28554) do
+                                v28559.Position = v28560;
+                            end;
+                            for _, v28562 in pairs(v28544:GetDescendants()) do
+                                if v28562:IsA("ImageLabel") then
+                                    l_l_v10_53_0:Create(v28562, TweenInfo.new(0.6), {
+                                        ImageTransparency = 0
+                                    }):Play();
+                                end;
+                            end;
+                            l_v28353_0._maid:give(v28544);
+                            local v28563 = l_l_vfx_3_0["fake punch wind"]:Clone();
+                            v28563.Parent = l_l_Thrown_53_0;
+                            v28563.CFrame = l_l_l_Hit_15_0_0.Torso.CFrame * CFrame.new(0, 0, 0);
+                            v28563.CFrame = v28563.CFrame * CFrame.new(0, 0, -3) * CFrame.Angles(-0.03490658503988659, 3.141592653589793, 0);
+                            l_v28353_0._maid:give(v28563);
+                            l_v28400_0(v28563, true, "Beam");
+                            local v28564 = 0;
+                            task.spawn(function() --[[ Line: 60003 ]]
+                                -- upvalues: v28564 (ref), v28563 (copy), l_l_dtwait_11_0 (ref), l_v28400_0 (ref)
+                                for v28565 = 1, 30 do
+                                    v28564 = v28564 + 8;
+                                    for _, v28567 in pairs(v28563:GetDescendants()) do
+                                        if v28567:IsA("Beam") then
+                                            v28567.Color = ColorSequence.new({
+                                                ColorSequenceKeypoint.new(0, Color3.fromRGB(v28564, v28564, v28564)), 
+                                                ColorSequenceKeypoint.new(1, Color3.fromRGB(v28564, v28564, v28564))
+                                            });
+                                        end;
+                                    end;
+                                    l_l_dtwait_11_0(0.01);
+                                    if v28565 == 30 then
+                                        l_l_dtwait_11_0(0.1);
+                                        task.spawn(function() --[[ Line: 60019 ]]
+                                            -- upvalues: v28564 (ref), v28563 (ref), l_l_dtwait_11_0 (ref), l_v28400_0 (ref)
+                                            for v28568 = 1, 30 do
+                                                v28564 = v28564 - 8;
+                                                for _, v28570 in pairs(v28563:GetDescendants()) do
+                                                    if v28570:IsA("Beam") then
+                                                        v28570.Color = ColorSequence.new({
+                                                            ColorSequenceKeypoint.new(0, Color3.fromRGB(v28564, v28564, v28564)), 
+                                                            ColorSequenceKeypoint.new(1, Color3.fromRGB(v28564, v28564, v28564))
+                                                        });
+                                                    end;
+                                                end;
+                                                l_l_dtwait_11_0(0.01);
+                                                if v28568 == 30 then
+                                                    l_v28400_0(v28563, false, "Beam");
+                                                end;
+                                            end;
+                                        end);
+                                    end;
+                                end;
+                            end);
+                            task.delay(0.3, function() --[[ Line: 60042 ]]
+                                -- upvalues: l_l_vfx_3_0 (ref), l_l_Thrown_53_0 (ref), l_l_l_Hit_15_0_0 (ref), l_v28353_0 (ref), l_l_PlayAttachment_11_0 (ref)
+                                local v28571 = l_l_vfx_3_0["particles air"]:Clone();
+                                v28571.Parent = l_l_Thrown_53_0;
+                                v28571.CFrame = l_l_l_Hit_15_0_0.Torso.CFrame;
+                                v28571.CFrame = v28571.CFrame * CFrame.new(0, 1.3, 0) * CFrame.Angles(0.3665191429188092, 3.141592653589793, 0);
+                                l_v28353_0._maid:give(v28571);
+                                l_l_PlayAttachment_11_0(v28571);
+                            end);
+                            l_l_dtwait_11_0(1.3);
+                            for _, v28573 in pairs(v28544:GetDescendants()) do
+                                if v28573:IsA("ImageLabel") then
+                                    l_l_v10_53_0:Create(v28573, TweenInfo.new(0.6), {
+                                        ImageTransparency = 1
+                                    }):Play();
+                                end;
+                            end;
+                            l_l_dtwait_11_0(0.6);
+                            local l_ColorCorrectionEffect_8 = Instance.new("ColorCorrectionEffect");
+                            l_ColorCorrectionEffect_8.Parent = game.Lighting;
+                            l_ColorCorrectionEffect_8.Brightness = -0.6;
+                            l_v28353_0._maid:give(l_ColorCorrectionEffect_8);
+                            l_l_dtwait_11_0(0.1);
+                            l_ColorCorrectionEffect_8:Destroy();
+                            local v28575 = l_l_vfx_3_0["screen effect last punch"]:Clone();
+                            v28575.Parent = l_l_Thrown_53_0;
+                            v28575.CFrame = l_l_l_Hit_15_0_0.Torso.CFrame * CFrame.new(-7, 10, 4.5) * CFrame.Angles(0.3141592653589793, 0, 0.2792526803190927);
+                            l_v28353_0._maid:give(v28575);
+                            task.delay(0.3, function() --[[ Line: 60076 ]]
+                                -- upvalues: l_l_PlayAttachment_11_0 (ref), v28575 (copy)
+                                l_l_PlayAttachment_11_0(v28575.letters);
+                                l_l_PlayAttachment_11_0(v28575);
+                            end);
+                            l_l_dtwait_11_0(3.63);
+                            v28575:Destroy();
+                            local v28576 = l_l_vfx_3_0["big punch beams and mesh"]:Clone();
+                            v28576.Parent = l_l_Thrown_53_0;
+                            v28576.CFrame = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(-11, 170, -97);
+                            v28576.Orientation = Vector3.new(90, -151.87100219726562, 0, 0);
+                            l_v28353_0._maid:give(v28576);
+                            l_v28400_0(v28576, true, "Beam");
+                            local v28577 = l_l_NewDC_0_1.DeathPunch:Clone();
+                            v28577.CFrame = l_l_l_Hit_15_0_0.Torso.CFrame * CFrame.new(25, 100, 25) * CFrame.Angles(0, 0, 0);
+                            v28577.CFrame = v28577.CFrame * CFrame.new(10, 40, 12) * CFrame.Angles(-1.3962634015954636, 0.24434609527920614, 0.3665191429188092);
+                            v28577.Parent = l_l_Thrown_53_0;
+                            l_v28353_0._maid:give(v28577);
+                            task.delay(0.1, function() --[[ Line: 60100 ]]
+                                -- upvalues: l_l_v10_53_0 (ref), v28577 (copy), l_l_l_Hit_15_0_0 (ref)
+                                l_l_v10_53_0:Create(v28577, TweenInfo.new(0.65, Enum.EasingStyle.Circular), {
+                                    CFrame = l_l_l_Hit_15_0_0.Torso.CFrame * CFrame.new(29, 47, 25) * CFrame.Angles(-1.1344640137963142, 0.47123889803846897, 0.4014257279586958)
+                                }):Play();
+                            end);
+                            l_l_dtwait_11_0(1.25);
+                            task.spawn(function() --[[ Line: 60106 ]]
+                                -- upvalues: l_l_dtwait_11_0 (ref)
+                                local l_ColorCorrectionEffect_9 = Instance.new("ColorCorrectionEffect");
+                                l_ColorCorrectionEffect_9.Parent = game.Lighting;
+                                l_ColorCorrectionEffect_9.Brightness = -1;
+                                l_ColorCorrectionEffect_9.Contrast = -10;
+                                l_ColorCorrectionEffect_9.Saturation = -1;
+                                l_l_dtwait_11_0(0.05);
+                                l_ColorCorrectionEffect_9.Brightness = 1;
+                                l_ColorCorrectionEffect_9.Contrast = 5;
+                                l_ColorCorrectionEffect_9.Saturation = -1;
+                                l_l_dtwait_11_0(0.05);
+                                l_ColorCorrectionEffect_9:Destroy();
+                            end);
+                            l_l_dtwait_11_0(0.05);
+                            v28576:Destroy();
+                            v28577:Destroy();
+                            local v28579 = l_v28441_0({
+                                cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(-7, 63, -80), 
+                                transparency = 0, 
+                                mesh = l_l_meshes_0_0["last punch mesh 2"]
+                            });
+                            v28579.Orientation = Vector3.new(0, -135, 0, 0);
+                            local v28580 = l_v28441_0({
+                                cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(-18, -1, -84), 
+                                transparency = 0, 
+                                mesh = l_l_meshes_0_0["last punch mesh 3"]
+                            });
+                            v28580.Orientation = Vector3.new(0, -45, 0, 0);
+                            local v28581 = l_v28441_0({
+                                cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(0, 68, -79), 
+                                transparency = 0, 
+                                scale = Vector3.new(5, 3, 3, 0), 
+                                mesh = l_l_meshes_0_0["last punch mesh"]
+                            });
+                            v28581.Orientation = Vector3.new(-0.7059999704360962, -45.994998931884766, 89.29399871826172, 0);
+                            local v28582 = l_v28441_0({
+                                cframe = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(0, 68, -79), 
+                                transparency = 0, 
+                                scale = Vector3.new(0, 95, 0, 0), 
+                                mesh = l_l_meshes_0_0["last punch mesh 1"]
+                            });
+                            v28581.Orientation = Vector3.new(0, 0, 0, 0);
+                            local v28583 = l_l_vfx_3_0["last punch fx"]:Clone();
+                            v28583.Parent = l_l_Thrown_53_0;
+                            v28583.CFrame = l_l_l_Char_33_0_1.PrimaryPart.CFrame * CFrame.new(1, -1, -78);
+                            l_v28353_0._maid:give(v28583);
+                            l_v28400_0(v28583, true, "Beam");
+                            local v28584 = TweenInfo.new(1.11, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out);
+                            local v28585 = {
+                                transparency2 = 1, 
+                                scale = Vector3.new(150, 300, 150, 0), 
+                                cframe = v28582.CFrame * CFrame.new(0, -30, 0) * CFrame.Angles(0, 3.141592653589793, 0)
+                            };
+                            local l_v28584_0 = v28584 --[[ copy: 25 -> 45 ]];
+                            local l_v28585_0 = v28585 --[[ copy: 26 -> 46 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28582 (copy), l_l_v10_53_0 (ref), l_v28584_0 (copy), l_v28585_0 (copy)
+                                if not v28582:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28582, l_v28584_0, {
+                                        CFrame = l_v28585_0.cframe, 
+                                        Size = l_v28585_0.size, 
+                                        Transparency = l_v28585_0.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28582, l_v28584_0, {
+                                        CFrame = l_v28585_0.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28582:FindFirstChildWhichIsA("SpecialMesh"), l_v28584_0, {
+                                        Scale = l_v28585_0.scale
+                                    }):Play();
+                                end;
+                                for _, v28589 in pairs(v28582:GetChildren()) do
+                                    if v28589:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28589, l_v28584_0, {
+                                            Transparency = l_v28585_0.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            v28584 = TweenInfo.new(0.11, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out);
+                            v28585 = {
+                                transparency2 = 1, 
+                                scale = Vector3.new(1.5, 0, 0, 0), 
+                                cframe = v28581.CFrame * CFrame.new(-70, 0, 0)
+                            };
+                            local l_v28584_1 = v28584 --[[ copy: 25 -> 47 ]];
+                            local l_v28585_1 = v28585 --[[ copy: 26 -> 48 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28581 (copy), l_l_v10_53_0 (ref), l_v28584_1 (copy), l_v28585_1 (copy)
+                                if not v28581:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28581, l_v28584_1, {
+                                        CFrame = l_v28585_1.cframe, 
+                                        Size = l_v28585_1.size, 
+                                        Transparency = l_v28585_1.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28581, l_v28584_1, {
+                                        CFrame = l_v28585_1.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28581:FindFirstChildWhichIsA("SpecialMesh"), l_v28584_1, {
+                                        Scale = l_v28585_1.scale
+                                    }):Play();
+                                end;
+                                for _, v28593 in pairs(v28581:GetChildren()) do
+                                    if v28593:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28593, l_v28584_1, {
+                                            Transparency = l_v28585_1.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            v28584 = TweenInfo.new(0.11, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out);
+                            v28585 = {
+                                transparency1 = 1, 
+                                size = Vector3.new(0.0010000000474974513, 100, 0.0010000000474974513, 0), 
+                                cframe = v28579.CFrame * CFrame.new(-4, -49, -6)
+                            };
+                            local l_v28584_2 = v28584 --[[ copy: 25 -> 49 ]];
+                            local l_v28585_2 = v28585 --[[ copy: 26 -> 50 ]];
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28579 (copy), l_l_v10_53_0 (ref), l_v28584_2 (copy), l_v28585_2 (copy)
+                                if not v28579:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28579, l_v28584_2, {
+                                        CFrame = l_v28585_2.cframe, 
+                                        Size = l_v28585_2.size, 
+                                        Transparency = l_v28585_2.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28579, l_v28584_2, {
+                                        CFrame = l_v28585_2.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28579:FindFirstChildWhichIsA("SpecialMesh"), l_v28584_2, {
+                                        Scale = l_v28585_2.scale
+                                    }):Play();
+                                end;
+                                for _, v28597 in pairs(v28579:GetChildren()) do
+                                    if v28597:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28597, l_v28584_2, {
+                                            Transparency = l_v28585_2.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                            v28584 = TweenInfo.new(0.11, Enum.EasingStyle.Linear);
+                            v28585 = {
+                                transparency1 = 1, 
+                                size = Vector3.new(0.0010000000474974513, 250, 0.0010000000474974513, 0), 
+                                cframe = v28580.CFrame * CFrame.new(24, 80, -8)
+                            };
+                            task.spawn(function() --[[ Line: 59699 ]]
+                                -- upvalues: v28580 (copy), l_l_v10_53_0 (ref), v28584 (copy), v28585 (copy)
+                                if not v28580:FindFirstChildWhichIsA("SpecialMesh") then
+                                    l_l_v10_53_0:Create(v28580, v28584, {
+                                        CFrame = v28585.cframe, 
+                                        Size = v28585.size, 
+                                        Transparency = v28585.transparency1
+                                    }):Play();
+                                else
+                                    l_l_v10_53_0:Create(v28580, v28584, {
+                                        CFrame = v28585.cframe
+                                    }):Play();
+                                    l_l_v10_53_0:Create(v28580:FindFirstChildWhichIsA("SpecialMesh"), v28584, {
+                                        Scale = v28585.scale
+                                    }):Play();
+                                end;
+                                for _, v28599 in pairs(v28580:GetChildren()) do
+                                    if v28599:IsA("Decal") then
+                                        l_l_v10_53_0:Create(v28599, v28584, {
+                                            Transparency = v28585.transparency2
+                                        }):Play();
+                                    end;
+                                end;
+                            end);
+                        end);
