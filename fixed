@@ -1,0 +1,272 @@
+local rs = game:GetService("RunService")
+if not rs:IsClient() then return end
+
+local lp = game:GetService("Players").LocalPlayer
+local c = lp.Character or lp.CharacterAdded:Wait()
+local hrp = c:WaitForChild("HumanoidRootPart")
+
+-- TRY TO FIND SOURCE
+local src
+local success = pcall(function()
+	src = game.ReplicatedStorage.Resources.KJEffects.DropkickExtra.lastimpact.lastuimapktu
+end)
+
+if not success or not src then
+	warn("SOURCE NOT FOUND!")
+	return
+end
+
+print("SOURCE FOUND:", src:GetFullName())
+
+-- COMPLETE LIST OF EVERY PARTICLE EMITTER PROPERTY
+local emitterProps = {
+	-- Visual Properties
+	"Brightness",
+	"Color",
+	"LightEmission",
+	"LightInfluence",
+	"Orientation",
+	"Size",
+	"Squash",
+	"Texture",
+	"Transparency",
+	"ZOffset",
+	
+	-- Emission Properties
+	"EmissionDirection",
+	"Enabled",
+	"Lifetime",
+	"Rate",
+	"RotSpeed",
+	"Rotation",
+	"Speed",
+	"SpreadAngle",
+	"TimeScale",
+	
+	-- Physics Properties
+	"Acceleration",
+	"Drag",
+	"VelocityInheritance",
+	"WindAffectsDrag",
+	
+	-- Shape Properties
+	"Shape",
+	"ShapeInOut",
+	"ShapePartial",
+	"ShapeStyle",
+	
+	-- Flipbook Properties
+	"FlipbookFramerate",
+	"FlipbookLayout",
+	"FlipbookMode",
+	"FlipbookStartRandom",
+	
+	-- Behavior Properties
+	"LockedToPart",
+	"FaceCamera",
+	
+	-- Other
+	"Name"
+}
+
+-- COMPLETE LIST OF EVERY ATTACHMENT PROPERTY
+local attachmentProps = {
+	"Axis",
+	"CFrame",
+	"Orientation",
+	"Position",
+	"Rotation",
+	"SecondaryAxis",
+	"Visible",
+	"WorldAxis",
+	"WorldCFrame",
+	"WorldOrientation",
+	"WorldPosition",
+	"WorldSecondaryAxis",
+	"Name"
+}
+
+-- ULTRA-PRECISE VALUE SERIALIZER WITH MAXIMUM ACCURACY
+local function vStr(v)
+	local t = typeof(v)
+	if t == "string" then
+		return string.format("%q", v)
+	elseif t == "boolean" then
+		return tostring(v)
+	elseif t == "number" then
+		-- Maximum precision for numbers
+		if v == math.huge then
+			return "math.huge"
+		elseif v == -math.huge then
+			return "-math.huge"
+		elseif v ~= v then -- NaN check
+			return "0/0"
+		else
+			return string.format("%.17g", v)
+		end
+	elseif t == "Color3" then
+		return ("Color3.new(%.17g,%.17g,%.17g)"):format(v.R, v.G, v.B)
+	elseif t == "Vector3" then
+		return ("Vector3.new(%.17g,%.17g,%.17g)"):format(v.X, v.Y, v.Z)
+	elseif t == "Vector2" then
+		return ("Vector2.new(%.17g,%.17g)"):format(v.X, v.Y)
+	elseif t == "CFrame" then
+		local cf = {v:GetComponents()}
+		local formatted = {}
+		for i,val in ipairs(cf) do
+			formatted[i] = string.format("%.17g", val)
+		end
+		return "CFrame.new("..table.concat(formatted, ",")..")"
+	elseif t == "UDim2" then
+		return ("UDim2.new(%.17g,%.17g,%.17g,%.17g)"):format(v.X.Scale,v.X.Offset,v.Y.Scale,v.Y.Offset)
+	elseif t == "NumberRange" then
+		return ("NumberRange.new(%.17g,%.17g)"):format(v.Min,v.Max)
+	elseif t == "NumberSequence" then
+		local pts = {}
+		for _,k in ipairs(v.Keypoints) do
+			table.insert(pts,("NumberSequenceKeypoint.new(%.17g,%.17g,%.17g)"):format(k.Time,k.Value,k.Envelope))
+		end
+		return "NumberSequence.new({"..table.concat(pts,",").."})"
+	elseif t == "ColorSequence" then
+		local pts = {}
+		for _,k in ipairs(v.Keypoints) do
+			table.insert(pts,("ColorSequenceKeypoint.new(%.17g,Color3.new(%.17g,%.17g,%.17g))"):format(k.Time,k.Value.R,k.Value.G,k.Value.B))
+		end
+		return "ColorSequence.new({"..table.concat(pts,",").."})"
+	elseif t == "EnumItem" then
+		return tostring(v)
+	elseif t == "Rect" then
+		return ("Rect.new(%.17g,%.17g,%.17g,%.17g)"):format(v.Min.X,v.Min.Y,v.Max.X,v.Max.Y)
+	else
+		return nil
+	end
+end
+
+-- Find all emitters
+local emitters = {}
+for _,obj in ipairs(src:GetDescendants()) do
+	if obj:IsA("ParticleEmitter") then
+		table.insert(emitters, obj)
+		print("FOUND EMITTER:", obj.Name, "Rate:", obj.Rate, "Texture:", obj.Texture)
+	end
+end
+
+if #emitters == 0 then
+	warn("NO EMITTERS FOUND!")
+	return
+end
+
+local s = {}
+table.insert(s,[[
+-- PERFECT PARTICLE CLONE SCRIPT - ZERO LOCAL VARIABLES
+_G.PFX=_G.PFX or {}
+_G.PFX.p=game:GetService("Players")
+_G.PFX.lp=_G.PFX.p.LocalPlayer
+_G.PFX.c=_G.PFX.lp.Character or _G.PFX.lp.CharacterAdded:Wait()
+_G.PFX.hrp=_G.PFX.c:WaitForChild("HumanoidRootPart")
+
+-- Create holder part
+_G.PFX.f=Instance.new("Part")
+_G.PFX.f.Name="PERFECT_PARTICLE_CLONE"
+_G.PFX.f.Anchored=true
+_G.PFX.f.CanCollide=false
+_G.PFX.f.CanQuery=false
+_G.PFX.f.CanTouch=false
+_G.PFX.f.Transparency=1
+_G.PFX.f.Size=Vector3.new(1,1,1)
+_G.PFX.f.CFrame=_G.PFX.hrp.CFrame*CFrame.new(0,0,-3)
+_G.PFX.f.Parent=workspace
+
+-- Storage tables
+_G.PFX.att={}
+_G.PFX.emit={}
+
+]])
+
+local counter = 0
+local totalProperties = 0
+
+-- Clone each emitter with PERFECT accuracy using table indices
+for _,emitter in ipairs(emitters) do
+	counter = counter + 1
+	local idx = counter
+	
+	-- Create attachment
+	table.insert(s,"-- Emitter "..idx..": "..emitter.Name.."\n")
+	table.insert(s,"_G.PFX.att["..idx.."]=Instance.new('Attachment')\n")
+	
+	-- Copy attachment properties if parent is attachment
+	if emitter.Parent:IsA("Attachment") then
+		local att = emitter.Parent
+		table.insert(s,"_G.PFX.att["..idx.."].Name="..vStr(att.Name).."\n")
+		
+		for _,prop in ipairs(attachmentProps) do
+			local ok, val = pcall(function()return att[prop]end)
+			if ok and val ~= nil and prop ~= "Name" and not prop:find("World") then
+				local sv = vStr(val)
+				if sv then
+					table.insert(s,"_G.PFX.att["..idx.."]."..prop.."="..sv.."\n")
+					totalProperties = totalProperties + 1
+				end
+			end
+		end
+	else
+		table.insert(s,"_G.PFX.att["..idx.."].Name='Attachment"..idx.."'\n")
+	end
+	
+	table.insert(s,"_G.PFX.att["..idx.."].Parent=_G.PFX.f\n\n")
+	
+	-- Create particle emitter
+	table.insert(s,"_G.PFX.emit["..idx.."]=Instance.new('ParticleEmitter')\n")
+	table.insert(s,"_G.PFX.emit["..idx.."].Name="..vStr(emitter.Name).."\n")
+	
+	-- Copy EVERY SINGLE PROPERTY with maximum precision
+	for _,prop in ipairs(emitterProps) do
+		local ok, val = pcall(function()return emitter[prop]end)
+		if ok and val ~= nil and prop ~= "Name" then
+			local sv = vStr(val)
+			if sv then
+				table.insert(s,"_G.PFX.emit["..idx.."]."..prop.."="..sv.."\n")
+				totalProperties = totalProperties + 1
+			end
+		end
+	end
+	
+	table.insert(s,"_G.PFX.emit["..idx.."].Parent=_G.PFX.att["..idx.."]\n")
+	
+	-- FIXED EMIT(15)
+	table.insert(s,"_G.PFX.emit["..idx.."]:Emit(15)\n\n")
+end
+
+-- Cleanup function
+table.insert(s,"game:GetService('Debris'):AddItem(_G.PFX.f,20)\n")
+table.insert(s,"task.delay(20,function() _G.PFX={} end)\n\n")
+
+table.insert(s,"print('════════════════════════════════')\n")
+table.insert(s,"print('PERFECT PARTICLE CLONE CREATED')\n")
+table.insert(s,"print('Cloned: "..counter.." emitters')\n")
+table.insert(s,"print('Total Properties: "..totalProperties.."')\n")
+table.insert(s,"print('Emit amount: 15 particles per emitter')\n")
+table.insert(s,"print('Location: 3 studs in front of you')\n")
+table.insert(s,"print('Part Name: PERFECT_PARTICLE_CLONE')\n")
+table.insert(s,"print('════════════════════════════════')\n")
+
+local finalCode = table.concat(s)
+setclipboard(finalCode)
+
+print("════════════════════════════════════════")
+print("EMIT(15) SCRIPT COPIED TO CLIPBOARD!")
+print("════════════════════════════════════════")
+print("Emitters Cloned:", counter)
+print("Total Properties Copied:", totalProperties)
+print("Emission Method: Emit(15) for all emitters")
+print("════════════════════════════════════════")
+print("Features:")
+print("  ✓ Fixed Emit(15) for all particles")
+print("  ✓ NO local allocation errors")
+print("  ✓ Perfect size matching")
+print("  ✓ Exact color sequences")
+print("  ✓ All properties copied (17 decimal precision)")
+print("  ✓ Auto cleanup after 20 seconds")
+print("════════════════════════════════════════")
+warn("PASTE INTO CONSOLE NOW!")
